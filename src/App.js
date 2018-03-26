@@ -1,18 +1,34 @@
 import React, { Component } from 'react';
 import './App.css';
-import METERS from './mock-meters';
+import Chart from './Chart/Chart';
+import METERS from './mock-meters.ts';
+import DEMANDS from './mock-demands.ts';
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {data: [
+      {time:0, value:5},
+      {time:1, value:10},
+      {time:2, value:1},
+      {time:3, value:3},
+      {time:4, value:6},
+      {time:5, value:7},
+      {time:6, value:11},
+      {time:7, value:5},
+      {time:8, value:7}
+    ]};
+ }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className='App'>
+        <div className='App-header'>
+          <h2>Dashboard</h2>
+        </div>
+        <div>
+          <Chart data={this.state.data} size={[500,500]} />
+        </div>
       </div>
     );
   }
