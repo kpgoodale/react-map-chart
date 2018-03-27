@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Chart from './Chart/Chart';
+import Map from './Map/Map';
 import METERS from './mock-meters.ts';
 import DEMANDS from './mock-demands.ts';
 
@@ -34,6 +35,9 @@ class App extends Component {
       <div className='App'>
         <div className='App-header'>
           <h2 onClick={this.changeData}>Dashboard</h2>
+        </div>
+        <div>
+          <Map/>
         </div>
         <div>
           <Chart data={this.state.data} size={[500,500]} />
