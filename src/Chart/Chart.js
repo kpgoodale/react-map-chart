@@ -22,13 +22,13 @@ class Chart extends Component {
 
      createLineChart() {
         const node = this.node
-        const dataMax = max(this.props.data)
+        const dataMax = max(this.props.data.map((data) => data.value));
         const xScale = scaleLinear().domain([0,this.props.data.length]).range([0,this.props.size[1]]);
-        const yScale = scaleLinear().domain([0,11]).range([this.props.size[0],0]);
+        const yScale = scaleLinear().domain([0,dataMax]).range([this.props.size[0],0]);
         
         const lineGenerator = line()
             .x((d) => {
-                return xScale(d.time);
+                return xScale(new Date(Date.parse(d.time)).getHours());
             })
             .y((d) => {
                 return yScale(d.value);
