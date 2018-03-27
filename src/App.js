@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import Chart from './Chart/Chart';
 import Map from './Map/Map';
-import METERS from './mock-meters.ts';
-import DEMANDS from './mock-demands.ts';
+//import { Meter } from './meter.ts';
+import { METERS } from './mock-meters'; 
+//import { DEMANDS } from './mock-demands';
 
 class App extends Component {
   constructor(props){
@@ -22,7 +23,8 @@ class App extends Component {
     this.changeData = this.changeData.bind(this);
  }
 
- changeData() {
+ changeData(i) {
+   alert(i);
   this.setState({data: [
     {time:0, value:5},
     {time:1, value:10},
@@ -37,7 +39,9 @@ class App extends Component {
           <h2 onClick={this.changeData}>Dashboard</h2>
         </div>
         <div>
-          <Map/>
+          <Map 
+            changeData={(i)=>{this.changeData(i)}}
+            meters={METERS}/>
         </div>
         <div>
           <Chart data={this.state.data} size={[500,500]} />

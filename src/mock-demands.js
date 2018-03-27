@@ -1,6 +1,6 @@
-import { Demand } from './demand';
+//import { Demand } from './demand';
 
-export const DEMANDS: Demand[] = [
+export const DEMANDS = [
     {id: 1, time: 2234343, value: 44, meter: 1 },
     {id: 2, time: 2244343, value: 48, meter: 1 },
     {id: 3, time: 2254343, value: 57, meter: 1 },
