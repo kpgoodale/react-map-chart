@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/kpgoodale/react-map-chart#readme",
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "pg-promise": "^8.2.2"
   },
   "devDependencies": {
     "concurrently": "^3.5.1"

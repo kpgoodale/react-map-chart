@@ -4,19 +4,26 @@ import './App.css';
 import MeterExplore from './MeterExplore/MeterExplore';
 import Table from './Table/Table';
 //import { Meter } from './meter.ts';
-import { METERS } from './mock-meters'; 
-import { DEMANDS } from './mock-demands';
+//import { METERS } from './mock-meters'; 
+//import { DEMANDS } from './mock-demands';
 
 class App extends Component {
   constructor(props){
     super(props);
+    this.meters = '';
+    this.demands = '';
  }
 
 componentDidMount() {
-  let test = fetch('note/21', {
+  let getMeters = fetch('meters/', {
     accept: "application/json"
   }).then((response) => {return response.json();})
-    .then((data) => console.log(data));
+    .then((data) => this.meters = data);
+
+  let getDemands = fetch('demands/', {
+      accept: "application/json"
+    }).then((response) => {return response.json();})
+      .then((data) => this.demands = data);
 }
 
   render() {
@@ -31,11 +38,11 @@ componentDidMount() {
         </div>
         <Route
           path='/meter-explore'
-          render={(props) => <MeterExplore {...props} demands={DEMANDS} meters={METERS}/> }
+          render={(props) => <MeterExplore {...props} demands={this.demands} meters={this.meters}/> }
         />
         <Route
           path='/table'
-          render={(props) => <Table {...props} meters={METERS}/>}
+          render={(props) => <Table {...props} meters={this.meters}/>}
         />
       </div>
     );
