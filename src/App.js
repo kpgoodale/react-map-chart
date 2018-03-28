@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Chart from './Chart/Chart';
 import Map from './Map/Map';
+import Table from './Table/Table';
 //import { Meter } from './meter.ts';
 import { METERS } from './mock-meters'; 
 import { DEMANDS } from './mock-demands';
@@ -33,6 +34,9 @@ class App extends Component {
         </div>
         <div>
           <Chart data={this.state.data.filter((demand) => demand.meter == this.state.selectedMeter)} size={[500,500]} />
+        </div>
+        <div>
+          <Table meters={METERS}/>
         </div>
       </div>
     );
