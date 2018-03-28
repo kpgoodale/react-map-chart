@@ -12,6 +12,13 @@ class App extends Component {
     super(props);
  }
 
+componentDidMount() {
+  let test = fetch('note/21', {
+    accept: "application/json"
+  }).then((response) => {return response.json();})
+    .then((data) => console.log(data));
+}
+
   render() {
     return (
       <div className='App'>

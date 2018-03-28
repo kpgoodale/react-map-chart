@@ -1,22 +1,28 @@
 {
   "name": "react-map-chart",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "d3-array": "1.2.1",
-    "d3-axis": "1.0.8",
-    "d3-scale": "2.0.0",
-    "d3-selection": "1.3.0",
-    "d3-shape": "1.2.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.1"
-  },
+  "version": "1.0.0",
+  "description": "React frontend with d3 and maps, Express rest api",
+  "main": "server.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "node server.js",
+    "client": "node start-client.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kpgoodale/react-map-chart.git"
+  },
+  "author": "kpgoodale",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kpgoodale/react-map-chart/issues"
+  },
+  "homepage": "https://github.com/kpgoodale/react-map-chart#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.1"
   }
 }

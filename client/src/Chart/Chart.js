@@ -13,11 +13,11 @@ class Chart extends Component {
      }
 
      componentDidMount() {
-        this.createLineChart()
+        this.createLineChart();
      }
 
      componentDidUpdate() {
-        this.createLineChart()
+        this.createLineChart();
      }
 
      createLineChart() {
