@@ -21,14 +21,12 @@ class App extends Component {
  }
 
 fetchMeters() {
-  console.log('fetching meters');
   let getMeters = fetch('meters/', {
     accept: "application/json"
-  }).then((response) => {console.log('fetched0');return response.json()})
-    .then((data) => {console.log('fetched');this.setState({meters: data});console.log('x');console.log(data);});
+  }).then((response) =>  response.json())
+    .then((data) => this.setState({meters: data}));
 }
 fetchDemands() {
-  console.log('fetching demands');
   let getDemands = fetch('demands/', {
       accept: "application/json"
     }).then((response) => response.json())
@@ -36,8 +34,6 @@ fetchDemands() {
 }
 
   render() {
-    console.log('rendering');
-    console.log(this.state);
     return (
       <div className='App'>
         <div className='App-header'>
