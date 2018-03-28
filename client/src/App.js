@@ -10,23 +10,34 @@ import Table from './Table/Table';
 class App extends Component {
   constructor(props){
     super(props);
-    this.meters = '';
-    this.demands = '';
+    this.fetchDemands = this.fetchDemands.bind(this);
+    this.fetchMeters = this.fetchMeters.bind(this);
+    this.fetchDemands();
+    this.fetchMeters();
+    this.state = {
+      meters: [],
+      demands: []
+    };
  }
 
-componentDidMount() {
+fetchMeters() {
+  console.log('fetching meters');
   let getMeters = fetch('meters/', {
     accept: "application/json"
-  }).then((response) => {return response.json();})
-    .then((data) => this.meters = data);
-
+  }).then((response) => {console.log('fetched0');return response.json()})
+    .then((data) => {console.log('fetched');this.setState({meters: data});console.log('x');console.log(data);});
+}
+fetchDemands() {
+  console.log('fetching demands');
   let getDemands = fetch('demands/', {
       accept: "application/json"
-    }).then((response) => {return response.json();})
-      .then((data) => this.demands = data);
+    }).then((response) => response.json())
+      .then((data) => this.setState({demands: data}));
 }
 
   render() {
+    console.log('rendering');
+    console.log(this.state);
     return (
       <div className='App'>
         <div className='App-header'>
@@ -38,11 +49,11 @@ componentDidMount() {
         </div>
         <Route
           path='/meter-explore'
-          render={(props) => <MeterExplore {...props} demands={this.demands} meters={this.meters}/> }
+          render={(props) => <MeterExplore {...props} demands={this.state.demands} meters={this.state.meters}/> }
         />
         <Route
           path='/table'
-          render={(props) => <Table {...props} meters={this.meters}/>}
+          render={(props) => <Table {...props} meters={this.state.meters}/>}
         />
       </div>
     );

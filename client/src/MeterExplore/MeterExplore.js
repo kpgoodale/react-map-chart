@@ -7,7 +7,6 @@ class MeterExplore extends Component {
     constructor(props){
       super(props);
       this.state = {
-        data: this.props.demands,
         selectedMeter: 1
       };
       this.changeData = this.changeData.bind(this);
@@ -26,7 +25,7 @@ class MeterExplore extends Component {
                   meters={this.props.meters}/>
             </div>
             <div>
-                <Chart data={this.state.data.filter((demand) => demand.meter == this.state.selectedMeter)} size={[500,500]} />
+                <Chart data={this.props.demands.filter((demand) => demand.meter == this.state.selectedMeter)} size={[500,500]} />
             </div>
         </div>
       );

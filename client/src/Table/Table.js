@@ -5,6 +5,23 @@ import './Table.css';
 class Table extends Component {
     constructor(props){
         super(props);
+        this.state = {
+            sortedMeters: this.props.meters
+        };
+        this.sortById = this.sortById.bind(this);
+     }
+
+
+     componentDidMount() {
+        
+     }
+
+     sortById() {
+        /*
+        let sortedMeters = this.state.sortedMeters.sort((a,b) => a.id - b.id);
+        console.log(sortedMeters);
+        this.setState({sortedMeters: sortedMeters});
+        */
      }
 
 
