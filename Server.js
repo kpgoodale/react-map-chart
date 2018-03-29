@@ -1,5 +1,6 @@
 const Credentials = require('./credentials.js');
 const express = require("express");
+const path = require("path");
 const pgp = require('pg-promise')(/*options*/);
 const app = express();
 const db = pgp('postgres://'
