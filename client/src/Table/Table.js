@@ -20,10 +20,12 @@ class Table extends Component {
                     priority: 0,
                     name: "sortOther"
                 }
-            ]
+            ],
+            filterValue: ""
         }
         this.handleSortByIdClick = this.handleSortByIdClick.bind(this);
         this.handleSortByDateClick = this.handleSortByDateClick.bind(this);
+        this.handleFilterChange = this.handleFilterChange.bind(this);
      }
 
      sortMeters(meters,sortAlgorithms) {
@@ -33,6 +35,12 @@ class Table extends Component {
         .reduce((accumulatedSort,sortOption) => { 
             return accumulatedSort.sort((meterA,meterB) => sortOption.compareFunction(meterA,meterB,sortOption.isAsc))
         }, meters);
+
+        return sorted;
+     }
+
+     filterMeters(meters,filterValue) {
+        return meters.filter((meter) => filterValue === "" ? true : meter.status === filterValue);
      }
 
      handleSortByIdClick() {
@@ -53,12 +61,15 @@ class Table extends Component {
        this.setState({newState});        
     }
 
+    handleFilterChange(event) {
+        this.setState({filterValue: event.target.value});
+    }
+
      render() {
-        //TODO: apply filter -> feed into apply sort
         //TODO: this shouldn't be mutating props.meters
-        this.sortMeters(this.props.meters,this.state.sortAlgorithms);
-        
-        let rows = this.props.meters.map((meter) => {
+        let filteredMeters = this.filterMeters(this.props.meters,this.state.filterValue);
+        //TODO: refactor to use filtermeters().sortmeters(). or filter(fn).sort(fn), similar to how .map works
+        let rows = this.sortMeters(filteredMeters,this.state.sortAlgorithms).map((meter) => {
             return (
                 <tr key={meter.id}>
                     <td>{meter.id}</td>
@@ -71,21 +82,31 @@ class Table extends Component {
             );
         });
         return (
-          <table className='table'>
-            <thead>
-                <tr>
-                    <th onClick={this.handleSortByIdClick}>ID</th>
-                    <th>Lat/Lng</th>
-                    <th>Status</th>
-                    <th>Postal Code</th>
-                    <th>Location Description</th>
-                    <th onClick={this.handleSortByDateClick}>Installed On</th>
-                </tr>
-            </thead>
-            <tbody>
-                {rows}
-            </tbody>
-        </table>
+        <div>
+            <div>
+                <select value={this.state.filterValue} onChange={this.handleFilterChange}>
+                    <option value="">Filter by</option>
+                    <option value="ACTIVE">ACTIVE</option>
+                    <option value="INACTIVE">INACTIVE</option>
+                </select>
+                Clicking ID or Installed On header will sort
+            </div>
+            <table className='table'>
+                <thead>
+                    <tr>
+                        <th onClick={this.handleSortByIdClick}>ID</th>
+                        <th>Lat/Lng</th>
+                        <th>Status</th>
+                        <th>Postal Code</th>
+                        <th>Location Description</th>
+                        <th onClick={this.handleSortByDateClick}>Installed On</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {rows}
+                </tbody>
+            </table>
+        </div>
         );
       }
     }
